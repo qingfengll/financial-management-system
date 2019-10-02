@@ -6,6 +6,7 @@ html,body,#app,.wrapper{
 }
 body{
     font-family:"Helvetica Neue",Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+    background-color: #f9f9f9;
 }
 a{text-decoration: none}
 .content{
