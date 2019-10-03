@@ -5,30 +5,9 @@ var conn= mysql.createConnection(models.mysql);
 conn.connect();
 
 const ID = '0000000000';
+
 module.exports = {
-    //得到最大的ID
-    getMaxID:function(tabelName, tabaleIdName){
-        if(!isEmpty(tabelName) && !isEmpty(tabaleIdName)){
-            var sql = $sql.common.select_max_id;
-            conn.query(sql, [tabelName,tabaleIdName],function(err, result) {
-                if (err) {
-                    console.log(err);
-                    return false;
-                }
-                if (result[0] === undefined) {
-                    return false;
-                } else {
-                    var id = result[0];
-                    return setMaxID(id);
-                }
-            })
-        }else{
-            return false;
-        }
-    },
-
-
-    //判断字符串是否为空
+    maxID:ID,
     isEmpty:function (obj) {
         if(typeof obj == "undefined" || obj == null || obj == ""){
             return true;
@@ -41,16 +20,34 @@ module.exports = {
         if(typeof ret === 'undefined') {
             res.send('err');
         } else {
-            console.log(ret);
             res.send(ret);
         }
-    }
+    },
+    //得到最大的ID
+    getMaxID: function getData(tableName,tableIdName,callback,fail){
+        var sql = 'select max(' + tableIdName + ') id from ' + tableName;
+        conn.query(sql,function(err, result) {
+            if (err) {console.log(sql);
+                console.log(err);
+                fail(err);
+            }
+            if (result[0] == undefined) {
+                fail('没有找到值');
+            } else {
+                callback(setMaxId(result[0].id));
+            }
+        });
+    },
 }
-
-//下一个ID
-var setMaxID = function(maxID){
-    var num = parseInt(maxID);
-    num += 1;
-    num = String(num);
-    return ID.substr(0,10-num.length)+num;
+var setMaxId = function(maxID){
+    var num =  String(parseInt(maxID) + 1);
+    num = ID.substr(0,10-num.length)+num;
+    return num;
+}
+var isEmpty = function (obj) {
+    if(typeof obj == "undefined" || obj == null || obj == ""){
+        return true;
+    }else{
+        return false;
+    }
 }

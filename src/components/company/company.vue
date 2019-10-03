@@ -1,9 +1,5 @@
 <template>
     <div>
-        <el-breadcrumb separator="/" class="crumbs">
-            <el-breadcrumb-item>合作公司管理</el-breadcrumb-item>
-        </el-breadcrumb>
-
         <div>
             <el-button v-on:click="addCompany()" type="primary" style="float: right;margin: 0 0 10px 0">添加公司</el-button>
             <el-input v-model="search" placeholder="请输入公司名字搜索" style="width: 200px;margin:0 0 10px 0;"></el-input>
@@ -13,12 +9,13 @@
             :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pageSize,currentPage*pageSize)"
             hight="250"
             style="width: 100%">
-            <el-table-column label="ID" prop="company_id" width="120px"></el-table-column>
-            <el-table-column label="公司名字" prop="name" width="197px"></el-table-column>
-            <el-table-column label="电话" prop="phone" width="130px"></el-table-column>
-            <el-table-column label="地址" prop="address" width="300px"></el-table-column>
-            <el-table-column label="备注" prop="remark" width="150px"></el-table-column>
-            <el-table-column align="right" width="120px">
+            <el-table-column label="ID" prop="company_id"></el-table-column>
+            <el-table-column label="公司名字" prop="name" ></el-table-column>
+            <el-table-column label="电话" prop="phone" ></el-table-column>
+            <el-table-column label="座机" prop="landline" ></el-table-column>
+            <el-table-column label="地址" prop="address"></el-table-column>
+            <el-table-column label="备注" prop="remark" ></el-table-column>
+            <el-table-column align="right">
                 <template slot="header" slot-scope="scope">
                     <el-input
                         v-model="search"

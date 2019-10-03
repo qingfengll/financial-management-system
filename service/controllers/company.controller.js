@@ -6,9 +6,25 @@ var conn= mysql.createConnection(models.mysql);
 conn.connect();
 
 module.exports = {
-    addCompany:function () {
-        console.log(util.getMaxID('company_id','company'));
+    addCompany:function (req,res) {
+        var sqlName = $sql.company.add;
+        var value = req.body;
+
+        util.getMaxID('company','company_id',function(id){
+            conn.query(sqlName,[id,value.name,value.phone,value.landline,value.address,value.remark], function(err, result) {
+                if (err) {
+                    console.log(err);
+                }
+                if (result) {
+                    util.jsonWrite(res, result);
+                }
+            },function (message) {
+                console.log(message);
+                res.send(message);
+            });
+        });
     },
+
     getCompany:function (req, res) {
         var sqlName = $sql.company.select_all;
 
