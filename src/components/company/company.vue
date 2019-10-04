@@ -69,16 +69,37 @@
                 });
             },
             handleEdit(index, row) {
-
-                console.log(index, row);
+                this.$router.push({name:'addCompany',params:{data:row}});
             },
             handleDelete(index, row) {
                 const self = this;
 
-                self.$http.post('/api/company/getCompanyById',{id:'000000001'}).then(function(response) {
-                    console.log('返回了');
-
-                    self.tableData[0].name = '1234678';
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true
+                }).then(() => {
+                    var that = this;
+                    self.$http.post('/api/company/delete',{id:row.company_id}).then(function(response) {
+                        if(response.status == 200){
+                            that.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                            getData();
+                        }else{
+                            that.$message({
+                                type: 'info',
+                                message: '已取消删除'
+                            });
+                        }
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
                 });
             },
             addCompany(){
@@ -87,14 +108,11 @@
             },
             handleSizeChange(val) {
                 this.pageSize = val;
-                console.log(`每页 ${val} 条`);
             },
             handleCurrentChange(val) {
                 this.currentPage = val;
-                console.log(`当前页: ${val}`);
             },
             searchCompany(value){
-                console.log(value);
             },
         },
         mounted () {

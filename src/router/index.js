@@ -46,6 +46,7 @@ export default new Router({
                 },
                 {
                     path: '/addCompany',
+                    name: 'addCompany',
                     component:resolve => require(['../components/company/addCompany.vue'],resolve),
                 },
                 {

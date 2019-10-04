@@ -24,7 +24,25 @@ module.exports = {
             });
         });
     },
+    delete:function(req,res){
+        var sqlName = $sql.company.delete;
 
+        conn.query(sqlName,[req.body.id],function (err,result) {
+            if(err) console.log(err);
+            if(result) util.jsonWrite(res,result);
+        })
+
+    },
+    update:function(req,res){
+        var sqlName = $sql.company.update_company;
+        var data = req.body;
+        //UPDATE company SET name=?, phone=?,landLine=?, address=?, remark=? WHERE (company_id=?)
+        conn.query(sqlName,[data.name,data.phone,data.landline,
+            data.address,data.remark,data.company_id],function (err,result) {
+            if(err) console.log(err);
+            if(result) util.jsonWrite(res,result);
+        })
+    },
     getCompany:function (req, res) {
         var sqlName = $sql.company.select_all;
 

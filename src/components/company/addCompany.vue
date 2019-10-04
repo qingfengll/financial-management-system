@@ -48,6 +48,7 @@
             };
             return {
                 ruleForm: {
+                    company_id:'',
                     name: '',
                     landline:'',
                     phone: '',
@@ -68,6 +69,17 @@
             };
         },
         methods: {
+            setData(){
+                if(this.$route.params.data){
+                    var data = this.$route.params.data;
+                    this.ruleForm.company_id = data.company_id;
+                    this.ruleForm.name = data.name;
+                    this.ruleForm.landline = data.landline;
+                    this.ruleForm.phone = data.phone;
+                    this.ruleForm.address = data.address;
+                    this.ruleForm.remark = data.remark;
+                }
+            },
             submitForm(formName) {
                 const self = this;
                 let formData = {
@@ -79,16 +91,32 @@
                 };
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert("提交成功");
-                        self.$http.post('/api/company/addCompany',formData).then(function(response) {
-                            console.log(response);
-                            self.back();
-                        }).then(function(error) {
-                            console.log(error);
-                        })
+                        if(self.ruleForm.company_id == undefined && self.ruleForm.company_id == null){
+                            self.$http.post('/api/company/addCompany',formData).then(function(response) {
+                                if(response.status == 200){
+                                    alert("提交成功");
+                                    self.back();
+                                }else{
+                                    alert("提交失败");
+                                }
+                            }).then(function(error) {
+                                console.log(error);
+                            })
+                        }else{
+                            formData.company_id = self.ruleForm.company_id;
+                            self.$http.post('/api/company/update',formData).then(function(response) {
+                                if(response.status == 200){
+                                    alert("修改成功");
+                                    self.back();
+                                }else{
+                                    alert("修改失败");
+                                }
+                            }).then(function(error) {
+                                console.log(error);
+                            })
+                        }
                     }else {
-                        console.log('error submit!!');
-                        return false;
+                        console.log('失败');
                     }
                 });
             },
@@ -99,7 +127,10 @@
                 const self = this;
                 self.$router.push('/company');
             },
-        }
+        },
+        mounted () {
+            this.setData();
+        },
     }
 </script>
 
