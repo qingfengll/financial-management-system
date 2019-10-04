@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var  docController=require('../services/company.services');
+var docController=require('../services/company.services');
 
 router.post('/addCompany', docController.addCompany);// 增加用户接口
 router.get('/getCompany', docController.getCompany);// 的到所有用户接口
