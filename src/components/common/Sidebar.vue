@@ -31,7 +31,7 @@
                         subs: [
                             {
                                 index: 'analysis',
-                                title: '分析'
+                                title: '数据分析'
                             },
                             {
                                 index: 'overtimeManage',
@@ -46,22 +46,78 @@
                     {
                         icon: 'el-icon-setting',
                         index:'starffManage',
-                        title: '员工管理'
+                        title: '员工管理',
+                        subs: [
+                            {
+                                index: 'viewvStarff',
+                                title: '查看员工'
+                            },
+                            {
+                                index: 'overtimeManage',
+                                title: '员工加班管理'
+                            },
+                            {
+                                index: 'staffPositionManage',
+                                title: '员工职位管理'
+                            }
+                        ]
                     },
                     {
                         icon: 'el-icon-setting',
                         index:'part',
-                        title: '零件管理'
+                        title: '零件管理',
+                        subs: [
+                            {
+                                index: 'material',
+                                title: '零件管理'
+                            },
+                            {
+                                index: 'parts',
+                                title: '部件管理'
+                            },
+                            {
+                                index: 'suit',
+                                title: '套装管理'
+                            }
+                        ]
                     },
                     {
                         icon: 'el-icon-setting',
                         index:'company',
                         title: '合作公司管理',
+                        subs: [
+                            {
+                                index: 'company',
+                                title: '公司管理'
+                            },
+                            {
+                                index: 'quotes',
+                                title: '订单管理'
+                            },
+                            {
+                                index: 'accountStatement',
+                                title: '对账信息'
+                            }
+                        ]
                     },
                     {
                         icon: 'el-icon-setting',
                         index:'finance',
-                        title: '财务管理'
+                        title: '财务管理',
+                        subs: [
+                            {
+                                index: 'company',
+                                title: '公司管理'
+                            },
+                            {
+                                index: 'quotes',
+                                title: '订单管理'
+                            },
+                            {
+                                index: 'accountStatement',
+                                title: '对账信息'
+                            }
+                        ]
                     },
                     {
                         icon: 'el-icon-setting',

@@ -1,5 +1,5 @@
-const userApi = require('./api/userApi');
-const company = require('./api/company.api');
+const userApi = require('./controllers/user.controller');
+const company = require('./controllers/company.controller');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
