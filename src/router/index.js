@@ -60,6 +60,11 @@ export default new Router({
                 {
                     path: '/updataPassword',
                     component:resolve => require(['../components/home/updataPassword.vue'],resolve),
+                },
+                {
+                    path:'/material',
+                    name:'material',
+                    component:resolve => require(['../components/parts/material.vue'],resolve),
                 }
 
             ]
