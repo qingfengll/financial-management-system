@@ -45,9 +45,13 @@
                     },
                     {
                         icon: 'el-icon-setting',
-                        index:'starffManage',
+                        index:'staffManage',
                         title: '员工管理',
                         subs: [
+                            {
+                              index: 'staffManage',
+                                title: '员工管理'  
+                            },
                             {
                                 index: 'viewvStarff',
                                 title: '查看员工'

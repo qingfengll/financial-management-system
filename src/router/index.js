@@ -28,7 +28,12 @@ export default new Router({
                 {
                     path: '/starffManage',
                     component:resolve => require(['../components/staff/staffManage.vue'],resolve),
-
+                    children:[
+                        {
+                            path: '/staffManage',
+                            component:resolve => require(['../components/staff/staffManage.vue'],resolve),       // Vue-Core-Image-Upload组件
+                        }
+                    ]
                 },
                 {
                     path: '/part',
@@ -61,11 +66,11 @@ export default new Router({
                     path: '/updataPassword',
                     component:resolve => require(['../components/home/updataPassword.vue'],resolve),
                 },
-                {
-                    path:'/material',
-                    name:'material',
-                    component:resolve => require(['../components/parts/material.vue'],resolve),
-                }
+                // {
+                //     path:'/material',
+                //     name:'material',
+                //     component:resolve => require(['../components/parts/material.vue'],resolve),
+                // }
 
             ]
         },
