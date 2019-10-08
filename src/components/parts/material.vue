@@ -1,20 +1,20 @@
 <template>
     <div>
         <div>
-            <el-button v-on:click="addCompany()" type="primary" style="float: right;margin: 0 0 10px 0">添加公司</el-button>
-            <el-input v-model="search" placeholder="请输入公司名字搜索" style="width: 200px;margin:0 0 10px 0;"></el-input>
+            <el-button v-on:click="addMaterial()" type="primary" style="float: right;margin: 0 0 10px 0">添加零件</el-button>
+            <el-input v-model="search" placeholder="输入零件名字搜索" style="width: 200px;margin:0 0 10px 0;"></el-input>
         </div>
 
         <el-table
             :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pageSize,currentPage*pageSize)"
             hight="250"
             style="width: 100%">
-            <el-table-column label="ID" prop="company_id"></el-table-column>
-            <el-table-column label="公司名字" prop="name" ></el-table-column>
-            <el-table-column label="电话" prop="phone" ></el-table-column>
-            <el-table-column label="座机" prop="landline" ></el-table-column>
-            <el-table-column label="地址" prop="address"></el-table-column>
-            <el-table-column label="备注" prop="remark" ></el-table-column>
+            <el-table-column label="零件名字" prop="name" ></el-table-column>
+            <el-table-column label="长度（mm）" prop="height" ></el-table-column>
+            <el-table-column label="宽度（mm）" prop="width" ></el-table-column>
+            <el-table-column label="厚度（mm)" prop="thick"></el-table-column>
+            <el-table-column label="数量（m）" prop="count"></el-table-column>
+            <el-table-column label="单价（元/m)" prop="price"></el-table-column>
             <el-table-column align="right">
                 <template slot="header" slot-scope="scope">
                     <el-input
@@ -62,16 +62,17 @@
         methods: {
             getData(){
                 const self = this;
-                self.$http.get('/api/company/getCompany').then(function(response) {
+                self.$http.get('/api/material/getMaterial').then(function(response) {
                     self.tableData =  response.data;
                     self.currentTotal = self.tableData.length;
                 });
             },
             handleEdit(index, row) {
-                this.$router.push({name:'addCompany',params:{data:row}});
+                this.$router.push({name:'addMaterial',params:{data:row}});
             },
             handleDelete(index, row) {
                 const self = this;
+                console.log(row);
 
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
                     confirmButtonText: '确定',
@@ -79,16 +80,15 @@
                     type: 'warning',
                     center: true
                 }).then(() => {
-                    var that = this;
-                    self.$http.post('/api/company/delete',{id:row.company_id}).then(function(response) {
+                    self.$http.post('/api/material/delete',{id:row.material_id}).then(function(response) {
                         if(response.status == 200){
-                            that.$message({
+                            self.$message({
                                 type: 'success',
                                 message: '删除成功!'
                             });
-                            getData();
+                            self.getData();
                         }else{
-                            that.$message({
+                            self.$message({
                                 type: 'info',
                                 message: '已取消删除'
                             });
@@ -101,17 +101,15 @@
                     });
                 });
             },
-            addCompany(){
+            addMaterial(){
                 const self = this;
-                self.$router.push('/addCompany');
+                self.$router.push('/addMaterial');
             },
             handleSizeChange(val) {
                 this.pageSize = val;
             },
             handleCurrentChange(val) {
                 this.currentPage = val;
-            },
-            searchCompany(value){
             },
         },
         mounted () {
@@ -122,7 +120,6 @@
 </script>
 
 <style scoped>
-
     .edit{
         width: 20%;
     }

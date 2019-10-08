@@ -40,12 +40,15 @@ module.exports = {
     },
 }
 var setMaxId = function(maxID){
+    if(maxID == NaN){
+        maxID = ID;
+    }
     var num =  String(parseInt(maxID) + 1);
     num = ID.substr(0,10-num.length)+num;
     return num;
 }
 var isEmpty = function (obj) {
-    if(typeof obj == "undefined" || obj == null || obj == ""){
+    if(typeof obj == "undefined" || obj == null || obj == "" || obj == NaN){
         return true;
     }else{
         return false;
