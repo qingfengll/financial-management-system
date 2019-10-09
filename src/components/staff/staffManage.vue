@@ -4,18 +4,17 @@
     <div class="search_div">员工姓名：<el-input v-model="searchCondition.name" style="width:200px" placeholder="请输入内容"></el-input></div>
     <div class="search_div search_phone_box">电话：<el-input v-model="searchCondition.phone" style="width:200px" placeholder="请输入内容"></el-input></div>
     <el-button type="primary" icon="el-icon-search" @click="getData()">搜索</el-button>
-    <el-button type="primary" style="float:right">添加员工</el-button>
+    <el-button type="primary" style="float:right" @click="addStaff()">添加员工</el-button>
   </div>
   
   <el-table
-    ref="multipleTable"
     :data="tableData"
     v-loading="loading"
     element-loading-text="拼命加载中"
     element-loading-spinner="el-icon-loading"
     tooltip-effect="dark"
     style="width: 100%"
-    @selection-change="handleSelectionChange">
+   >
     <el-table-column
       type="selection"
       width="55">
@@ -78,6 +77,35 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="total">
     </el-pagination>
+    <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="姓名" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="电话" :label-width="formLabelWidth">
+           <el-input v-model="form.phone" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="性别" :label-width="formLabelWidth">
+           <el-input v-model="form.sex" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="职务" :label-width="formLabelWidth">
+           <el-input v-model="form.job" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="生日" :label-width="formLabelWidth">
+           <el-input v-model="form.birthday" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="身份证" :label-width="formLabelWidth">
+           <el-input v-model="form.id_card" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="备注" :label-width="formLabelWidth">
+           <el-input v-model="form.remark" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -95,7 +123,19 @@
           name:"",
           phone:""
         },
-        loading:false
+        loading:false,
+        dialogTitle:"",
+        dialogFormVisible:false,
+        formLabelWidth:40,
+        form:{
+          name:"",
+          phone:"",
+          sex:0,
+          job:"",
+          birthday:"",
+          id_card:"",
+          remark:""
+        }
       }
     },
     mounted(){
@@ -138,17 +178,9 @@
                     self.total = response.data[0].count;
           });
       },
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
+      addStaff(){
+        this.dialogTitle = "添加员工";
+        this.dialogFormVisible = true;
       },
       handleSizeChange(val) {
         this.pageSize = val;
