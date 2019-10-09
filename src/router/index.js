@@ -76,6 +76,17 @@ export default new Router({
                     name:'addMaterial',
                     component:resolve => require(['../components/parts/addMaterial.vue'],resolve),
                 },
+                {
+                    path:'/part',
+                    name:'part',
+                    component:resolve => require(['../components/parts/part.vue'],resolve),
+                },
+                {
+                    path:'/addPart',
+                    name:'addPart',
+                    component:resolve => require(['../components/parts/addPart.vue'],resolve),
+                },
+
 
             ]
         },

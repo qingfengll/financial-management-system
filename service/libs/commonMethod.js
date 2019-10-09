@@ -38,9 +38,17 @@ module.exports = {
             }
         });
     },
+    IdADD_1:function (id) {
+        if(id == NaN){
+            id = ID;
+        }
+        var num =  String(parseInt(id) + 1);
+        num = ID.substr(0,10-num.length)+num;
+        return num;
+    }
 }
 var setMaxId = function(maxID){
-    if(maxID == NaN){
+    if(maxID == NaN || maxID == 'NaN' || maxID == '' || maxID == undefined || maxID == null){
         maxID = ID;
     }
     var num =  String(parseInt(maxID) + 1);

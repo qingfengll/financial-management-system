@@ -1,13 +1,115 @@
 <template>
+    <div>
+        <div>
+            <el-button v-on:click="addPart()" type="primary" style="float: right;margin: 0 0 10px 0">添加部件</el-button>
+            <el-input v-model="search" placeholder="输入零件名字搜索" style="width: 200px;margin:0 0 10px 0;"></el-input>
+        </div>
 
+        <el-table
+            :data="tableData"
+            tooltip-effect="dark"
+            style="width: 100%"
+            @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="name" label="部件名称"></el-table-column>
+            <el-table-column prop="specifications" label="规格" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="unit" label="单位" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="remark" label="备注" show-overflow-tooltip></el-table-column>
+            <el-table-column align="right">
+                <template slot-scope="scope">
+                    <el-button
+                        size="mini"
+                        @click="handleEdit(scope.$index, scope.row,true)">查看详细</el-button>
+                    <el-button
+                        size="mini"
+                        @click="handleEdit(scope.$index, scope.row,false)">修改</el-button>
+                    <el-button
+                        size="mini"
+                        type="danger"
+                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+            <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[10, 20, 30, 40,50]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
+    </div>
 </template>
 
 <script>
     export default {
-        name: "part"
+        name:"part",
+        data() {
+            return {
+                tableData: [],
+                multipleSelection: [],
+                currentPage:1,
+                pageSize:10,
+                total:0,
+                search:''
+            }
+        },
+        mounted(){
+            this.getData();
+            this.getCount();
+        },
+        methods: {
+            getData(){
+                var params = {
+                    conditions:{
+
+                    },
+                    pages:{
+                        currentPage:this.currentPage,
+                        pageSize:this.pageSize
+                    }
+                }
+                const self = this;
+                self.$http.get('/api/parts/getAll',{params:params}).then(function(response) {
+                    self.tableData = response.data;
+                });
+            },
+            getCount(){
+                const self = this;
+                self.$http.get('/api/staff/getStaffCount',{}).then(function(response) {
+                    self.total = response.data[0].count;
+                });
+            },
+            toggleSelection(rows) {
+                if (rows) {
+                    rows.forEach(row => {
+                        this.$refs.multipleTable.toggleRowSelection(row);
+                    });
+                } else {
+                    this.$refs.multipleTable.clearSelection();
+                }
+            },
+            handleSee(val){
+
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            },
+            handleSizeChange(val) {
+                this.pageSize = val;
+                this.getData();
+            },
+            handleCurrentChange(val) {
+                this.currentPage = val;
+                this.getData();
+            },
+            addPart(){
+                this.$router.push('/addPart');
+            },
+            handleEdit(index, row, boo) {
+                this.$router.push({name:'addPart',params:{data:row,boo:boo}});
+            },
+        }
     }
 </script>
-
-<style scoped>
-
-</style>

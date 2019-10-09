@@ -40,7 +40,7 @@ module.exports = {
         var data = req.body;
         //UPDATE `material` SET `width`=?, `heigjt`=?, `thick`=?, `count`=?, `name`=?, `price`=? WHERE (`material_id`=?)
         conn.query(sqlName,[data.width,data.height,data.thick,
-            data.count,data.name,data.material_id],function (err,result) {
+            data.count,data.name,data.price,data.material_id],function (err,result) {
             if(err) console.log(err);
             if(result) util.jsonWrite(res,result);
         })

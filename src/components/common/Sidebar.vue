@@ -50,7 +50,7 @@
                         subs: [
                             {
                               index: 'staffManage',
-                                title: '员工管理'  
+                                title: '员工管理'
                             },
                             {
                                 index: 'viewvStarff',
@@ -76,7 +76,7 @@
                                 title: '零件管理'
                             },
                             {
-                                index: 'parts',
+                                index: 'part',
                                 title: '部件管理'
                             },
                             {
