@@ -18,7 +18,6 @@ module.exports = {
             // if (result[0] === undefined) {
             //     res.send('-1');   //查询不出username，data 返回-1
             // } else {
-                console.log(result);
                 util.jsonWrite(res, result);
             // }
         });
@@ -37,5 +36,65 @@ module.exports = {
                 util.jsonWrite(res, result);
             }
         });
-    }
+    },
+    getStaffById(req,res){
+        var sql_name = $sql.staff.select_fromID;
+        conn.query(sql_name,[req.query.staff_id], function(err, result) {
+            if (err) {
+                console.log("cuowu " + result);
+                console.log(err);
+            }
+            // if (result[0] === undefined) {
+            //     res.send('-1');   //查询不出username，data 返回-1
+            // } else {
+                console.log(result);
+                util.jsonWrite(res, result);
+            // }
+        });
+    
+    },
+    addStaff:function (req,res) {
+        var sqlName = $sql.staff.add;
+        var value = req.body;
+        var birthday = util.formateDate(value.birthday);
+        util.getMaxID('staff','staff_id',function(id){
+            conn.query(sqlName,[id,value.name,value.phone,value.position_id,value.sex,birthday,value.id_card,value.remark], function(err, result) {
+                if (err) {
+                    console.log(err);
+                }
+                if (result) {
+                    res.send("success");
+                }
+            },function (message) {
+                console.log(message);
+                res.send(message);
+            });
+        });
+    },
+    updateStaff:function (req,res) {
+        var sqlName = $sql.staff.update_staff;
+        var value = req.body;
+        var birthday = util.formateDate(value.birthday);
+            conn.query(sqlName,[value.name,value.phone,value.position_id,value.sex,birthday,value.id_card,value.remark,value.staff_id], function(err, result) {
+                if (err) {
+                    console.log(err);
+                }
+                if (result) {
+                    res.send("success");
+                }
+            },function (message) {
+                console.log(message);
+                res.send(message);
+            });
+    },
+    deleteStaff:function(req,res){
+        var sqlName = $sql.staff.delete;
+        conn.query(sqlName,[req.body.staff_id],function(err,result) {
+            if(err) console.log(err);
+            if(result){
+                res.send("success");
+            }
+        })
+
+    },
 }

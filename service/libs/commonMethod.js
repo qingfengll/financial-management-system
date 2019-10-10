@@ -45,7 +45,26 @@ module.exports = {
         var num =  String(parseInt(id) + 1);
         num = ID.substr(0,10-num.length)+num;
         return num;
-    }
+    },
+    formateDate(datetime) {
+        function addDateZero(num) {
+          return num < 10 ? '0' + num : num;
+        }
+        let d = new Date(datetime);
+        let formatdatetime =
+          d.getFullYear() +
+          '-' +
+          addDateZero(d.getMonth() + 1) +
+          '-' +
+          addDateZero(d.getDate()) +
+          ' ' +
+          addDateZero(d.getHours()) +
+          ':' +
+          addDateZero(d.getMinutes()) +
+          ':' +
+          addDateZero(d.getSeconds());
+        return formatdatetime;
+      }
 }
 var setMaxId = function(maxID){
     if(maxID == NaN || maxID == 'NaN' || maxID == '' || maxID == undefined || maxID == null){
