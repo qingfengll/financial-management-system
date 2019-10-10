@@ -43,15 +43,13 @@ module.exports = {
         });
     },
     getAll:function (req,res) {
-        var sql_name = search.slect_pages("parts",req.query);
+        var sql = $sql.parts.select_all;
+        var sql_name = search.slect_pages(sql,req.query);
         conn.query(sql_name, function(err, result) {
             if (err) {
                 console.log("cuowu " + result);
                 console.log(err);
-            }
-            if (result[0] === undefined) {
-                res.send('-1');   //查询不出username，data 返回-1
-            } else {
+            }else {
                 util.jsonWrite(res, result);
             }
         });
@@ -102,7 +100,27 @@ module.exports = {
                 util.jsonWrite(res, result);
             }
         });
+    },
+    delete:function (req,res) {
+        console.log(req);
+        var sqlName = $sql.parts.delete;
+        var sqlM_P_Name = $sql.material_parts.delete;
 
+        conn.query(sqlM_P_Name,[req.body.id], function(err, result) {
+            if(err){
+                console.log(err);
+                util.jsonWrite(res);
+            }else{
+                conn.query(sqlName,[req.body.id], function(err, result) {
+                    if(err){
+                        console.log(err);
+                        util.jsonWrite(res);
+                    }else{
+                        util.jsonWrite(res,result);
+                    }
+                });
+            }
+        });
     }
 };
 

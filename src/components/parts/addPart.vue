@@ -18,7 +18,7 @@
             <el-form-item label="备注" prop="remark">
                 <el-input :disabled="disabled" type="textarea" v-model="ruleForm.remark"></el-input>
             </el-form-item>
-            <el-form-item label=零件 prop="materialForm">
+            <el-form-item label=零件 prop="addMaterialData">
                 <el-button :disabled="disabled" type="text" @click="dialogTableVisible = true">添加零件</el-button>
                 <br>
                 <el-table :data="ruleForm.addMaterialData" tooltip-effect="dark" style="width: 100%">
@@ -31,7 +31,7 @@
                     <el-table-column align="right">
                         <template slot-scope="scope">
                             <el-button :disabled="disabled" size="mini" type="danger"
-                                @click="handleDelete(scope.$index, scope.row)">移除</el-button>
+                                @click="handleRemove(scope.$index, scope.row)">移除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -71,13 +71,13 @@
         </el-dialog>
         <el-dialog title="添加零件规格" :visible.sync="dialogFormVisible">
             <el-form :model="addMaterialPartForm">
-                <el-form-item label="长度">
+                <el-form-item label="长度" prop="length" aria-required="true">
                     <el-input v-model="addMaterialPartForm.length"></el-input>
                 </el-form-item>
-                <el-form-item label="数量">
+                <el-form-item label="数量" prop="number" :aria-required="true">
                     <el-input v-model="addMaterialPartForm.number"></el-input>
                 </el-form-item>
-                <el-form-item label="价格">
+                <el-form-item label="价格" prop="price">
                     <el-input v-model="addMaterialPartForm.price"></el-input>
                 </el-form-item>
             </el-form>
@@ -117,7 +117,27 @@
                 dialogTableVisible:false,
                 dialogFormVisible:false,
                 rules:{
-
+                    name: [
+                        { required: true, message: '请输入零件名称', trigger: 'blur' },
+                    ],
+                    specifications:[
+                        { required: true, message: '请输入规格', trigger: 'blur' },
+                    ],
+                    unit:[
+                        { required: true, message: '请选择单位', trigger: 'blur' },
+                    ],
+                    addMaterialData:[
+                        { required: true, message: '请选择零件', trigger: 'blur' },
+                    ],
+                    length:[
+                        { required: true, message: '请选择零件', trigger: 'blur' },
+                    ],
+                    number:[
+                        { required: true, message: '请选择零件', trigger: 'blur' },
+                    ],
+                    price:[
+                        { required: true, message: '请选择零件', trigger: 'blur' },
+                    ],
                 }
             };
         },
@@ -202,6 +222,12 @@
                         console.log('失败');
                     }
                 });
+            },
+            handleRemove(index,row){
+                this.ruleForm.addMaterialData.splice(index,1);
+            },
+            resetForm(formName){
+                this.$refs[formName].resetFields();
             },
             back(){
                 this.$router.push('/part');

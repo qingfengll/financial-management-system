@@ -90,9 +90,6 @@
                     this.$refs.multipleTable.clearSelection();
                 }
             },
-            handleSee(val){
-
-            },
             handleSelectionChange(val) {
                 this.multipleSelection = val;
             },
@@ -110,6 +107,30 @@
             handleEdit(index, row, boo) {
                 this.$router.push({name:'addPart',params:{data:row,boo:boo}});
             },
+            handleDelete(index, row){
+                const self = this;
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true
+                }).then(() => {
+                    self.$http.post('/api/parts/delete', {id: row.parts_id}).then(function (response) {
+                        if (response.status == 200) {
+                            self.$message({
+                                type: 'success',
+                                message: '删除成功!'
+                            });
+                            self.getData();
+                        } else {
+                            self.$message({
+                                type: 'info',
+                                message: '已取消删除'
+                            });
+                        }
+                    });
+                });
+            }
         }
     }
 </script>
