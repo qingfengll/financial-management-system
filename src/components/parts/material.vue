@@ -15,21 +15,16 @@
             <el-table-column label="厚度（mm)" prop="thick"></el-table-column>
             <el-table-column label="数量（m）" prop="count"></el-table-column>
             <el-table-column label="单价（元/m)" prop="price"></el-table-column>
-            <el-table-column align="right">
-                <template slot="header" slot-scope="scope">
-                    <el-input
-                        v-model="search"
-                        size="mini"
-                        placeholder="输入关键字搜索"/>
-                </template>
+            <el-table-column align="right" width="100px">
                 <template slot-scope="scope">
-                    <el-button
+                    <el-link
                         size="mini"
-                        @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-                    <el-button
+                        type="primary"
+                        @click="handleEdit(scope.$index, scope.row)">修改&nbsp;&nbsp;&nbsp;</el-link>
+                    <el-link
                         size="mini"
                         type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        @click="handleDelete(scope.$index, scope.row)">删除&nbsp;&nbsp;&nbsp;</el-link>
                 </template>
             </el-table-column>
         </el-table>
