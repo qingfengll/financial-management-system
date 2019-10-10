@@ -77,28 +77,31 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="total">
     </el-pagination>
-    <el-dialog width="30%" :title="dialogTitle" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="姓名" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+    <el-dialog width="30%" :title="dialogTitle" :visible.sync="dialogFormVisible" :close-on-click-modal=false>
+      <el-form label-position="right" label-width="80px" :rules="rules" :model="form">
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="form.name" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth">
-           <el-input v-model="form.phone" autocomplete="off"></el-input>
+        <el-form-item label="电话" prop="phone">
+           <el-input v-model="form.phone" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
-        <el-form-item label="性别" :label-width="formLabelWidth">
-           <el-input v-model="form.sex" autocomplete="off"></el-input>
+        <el-form-item label="性别" >
+            <el-radio-group v-model="form.sex">
+              <el-radio label="0">男</el-radio>
+              <el-radio label="1">女</el-radio>
+            </el-radio-group>
         </el-form-item>
-        <el-form-item label="职务" :label-width="formLabelWidth">
-           <el-input v-model="form.job" autocomplete="off"></el-input>
+        <el-form-item label="职务" prop="job">
+           <el-input v-model="form.job" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
-        <el-form-item label="生日" :label-width="formLabelWidth">
-           <el-input v-model="form.birthday" autocomplete="off"></el-input>
+        <el-form-item label="生日" prop="birthday">
+           <el-input v-model="form.birthday" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
-        <el-form-item label="身份证" :label-width="formLabelWidth">
-           <el-input v-model="form.id_card" autocomplete="off"></el-input>
+        <el-form-item label="身份证" prop="id_card">
+           <el-input v-model="form.id_card" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
-        <el-form-item label="备注" :label-width="formLabelWidth">
-           <el-input v-model="form.remark" autocomplete="off"></el-input>
+        <el-form-item label="备注" prop="remark">
+           <el-input v-model="form.remark" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -126,15 +129,32 @@
         loading:false,
         dialogTitle:"",
         dialogFormVisible:false,
-        formLabelWidth:40,
+        formLabelWidth:50,
         form:{
           name:"",
           phone:"",
-          sex:0,
+          sex:"0",
           job:"",
           birthday:"",
           id_card:"",
           remark:""
+        },
+        rules: {
+          name: [
+            { required: true, message: '请输入员工姓名', trigger: 'blur' }
+          ],
+          phone: [
+            { required: true, message: '请输入电话号码', trigger: 'change' }
+          ],
+          job: [
+            { required: true, message: '请输入职务', trigger: 'blur' }
+          ],
+          birthday: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          id_card: [
+            { required: true, message: '请输入身份证号', trigger: 'blur' }
+          ]
         }
       }
     },
@@ -200,5 +220,8 @@
 }
 .search_phone_box{
   margin-left:20px;
+}
+.form_input{
+  width:80%;
 }
 </style>
