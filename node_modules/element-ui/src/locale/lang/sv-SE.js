@@ -16,6 +16,10 @@ export default {
       startTime: 'Starttid',
       endDate: 'Slutdatum',
       endTime: 'Sluttid',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'År',
       month1: 'Januari',
       month2: 'Februari',
@@ -62,7 +66,9 @@ export default {
     },
     cascader: {
       noMatch: 'Hittade inget',
-      placeholder: 'Välj'
+      loading: 'Laddar',
+      placeholder: 'Välj',
+      noData: 'Ingen data'
     },
     pagination: {
       goto: 'Gå till',
@@ -77,6 +83,7 @@ export default {
       error: 'Felaktig inmatning'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Radera',
       preview: 'Förhandsvisa',
       continue: 'Fortsätt'
@@ -98,6 +105,12 @@ export default {
       filterPlaceholder: 'Enter keyword', // to be translated
       noCheckedFormat: '{total} items', // to be translated
       hasCheckedFormat: '{checked}/{total} checked' // to be translated
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

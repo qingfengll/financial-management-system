@@ -16,6 +16,10 @@ export default {
       startTime: 'Čas začiatku',
       endDate: 'Dátum konca',
       endTime: 'Čas konca',
+      prevYear: 'Predošlý rok',
+      nextYear: 'Ďalší rok',
+      prevMonth: 'Predošlý mesiac',
+      nextMonth: 'Ďalší mesiac',
       day: 'Deň',
       week: 'Týždeň',
       month: 'Mesiac',
@@ -64,7 +68,9 @@ export default {
     },
     cascader: {
       noMatch: 'Žiadna zhoda',
-      placeholder: 'Vybrať'
+      loading: 'Načítavanie',
+      placeholder: 'Vybrať',
+      noData: 'Žiadne dáta'
     },
     pagination: {
       goto: 'Choď na',
@@ -79,6 +85,7 @@ export default {
       error: 'Neplatný vstup'
     },
     upload: {
+      deleteTip: 'pre odstránenie stisni klávesu Delete',
       delete: 'Vymazať',
       preview: 'Prehliadať',
       continue: 'Pokračovať'
@@ -88,7 +95,7 @@ export default {
       confirmFilter: 'Potvrdiť',
       resetFilter: 'Zresetovať',
       clearFilter: 'Všetko',
-      sumText: 'Sum' // to be translated
+      sumText: 'Spolu'
     },
     tree: {
       emptyText: 'Žiadne dáta'
@@ -96,10 +103,16 @@ export default {
     transfer: {
       noMatch: 'Žiadna zhoda',
       noData: 'Žiadne dáta',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Zoznam 1', 'Zoznam 2'],
+      filterPlaceholder: 'Filtrovať podľa',
+      noCheckedFormat: '{total} položiek',
+      hasCheckedFormat: '{checked}/{total} označených'
+    },
+    image: {
+      error: 'FAILED' // to be translated
+    },
+    pageHeader: {
+      title: 'Back' // to be translated
     }
   }
 };

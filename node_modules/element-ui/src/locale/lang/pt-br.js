@@ -16,6 +16,10 @@ export default {
       startTime: 'Hora inicial',
       endDate: 'Data final',
       endTime: 'Hora final',
+      prevYear: 'Ano anterior',
+      nextYear: 'Próximo ano',
+      prevMonth: 'Mês anterior',
+      nextMonth: 'Próximo mês',
       year: '',
       month1: 'Janeiro',
       month2: 'Fevereiro',
@@ -62,11 +66,13 @@ export default {
     },
     cascader: {
       noMatch: 'Sem resultados',
-      placeholder: 'Selecione'
+      loading: 'Carregando',
+      placeholder: 'Selecione',
+      noData: 'Sem dados'
     },
     pagination: {
       goto: 'Ir para',
-      pagesize: '/pagina',
+      pagesize: '/página',
       total: 'Total {total}',
       pageClassifier: ''
     },
@@ -77,6 +83,7 @@ export default {
       error: 'Erro!'
     },
     upload: {
+      deleteTip: 'aperte delete para apagar',
       delete: 'Apagar',
       preview: 'Pré-visualizar',
       continue: 'Continuar'
@@ -86,7 +93,7 @@ export default {
       confirmFilter: 'Confirmar',
       resetFilter: 'Limpar',
       clearFilter: 'Todos',
-      sumText: 'Sum' // to be translated
+      sumText: 'Total'
     },
     tree: {
       emptyText: 'Sem dados'
@@ -94,10 +101,16 @@ export default {
     transfer: {
       noMatch: 'Sem resultados',
       noData: 'Sem dados',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Digite uma palavra-chave',
+      noCheckedFormat: '{total} itens',
+      hasCheckedFormat: '{checked}/{total} selecionados'
+    },
+    image: {
+      error: 'Erro ao carregar imagem'
+    },
+    pageHeader: {
+      title: 'Voltar'
     }
   }
 };
