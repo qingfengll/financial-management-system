@@ -16,20 +16,15 @@
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="备注" prop="remark" ></el-table-column>
             <el-table-column align="right">
-                <template slot="header" slot-scope="scope">
-                    <el-input
-                        v-model="search"
-                        size="mini"
-                        placeholder="输入关键字搜索"/>
-                </template>
                 <template slot-scope="scope">
-                    <el-button
+                    <el-link
                         size="mini"
-                        @click="handleEdit(scope.$index, scope.row)">修改</el-button>
-                    <el-button
+                        type="primary"
+                        @click="handleEdit(scope.$index, scope.row)">修改&nbsp;&nbsp;&nbsp;</el-link>
+                    <el-link
                         size="mini"
                         type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        @click="handleDelete(scope.$index, scope.row)">删除&nbsp;&nbsp;&nbsp;</el-link>
                 </template>
             </el-table-column>
         </el-table>

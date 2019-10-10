@@ -17,16 +17,18 @@
             <el-table-column prop="remark" label="备注" show-overflow-tooltip></el-table-column>
             <el-table-column align="right">
                 <template slot-scope="scope">
-                    <el-button
+                    <el-link
                         size="mini"
-                        @click="handleEdit(scope.$index, scope.row,true)">查看详细</el-button>
-                    <el-button
+                        type="primary"
+                        @click="handleEdit(scope.$index, scope.row,true)">查看详细&nbsp;&nbsp;&nbsp;</el-link>
+                    <el-link
                         size="mini"
-                        @click="handleEdit(scope.$index, scope.row,false)">修改</el-button>
-                    <el-button
+                        type="primary"
+                        @click="handleEdit(scope.$index, scope.row,false)">修改&nbsp;&nbsp;&nbsp;</el-link>
+                    <el-link
                         size="mini"
                         type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        @click="handleDelete(scope.$index, scope.row)">删除&nbsp;&nbsp;&nbsp;</el-link>
                 </template>
             </el-table-column>
         </el-table>
