@@ -86,6 +86,16 @@ export default new Router({
                     name:'addPart',
                     component:resolve => require(['../components/parts/addPart.vue'],resolve),
                 },
+                {
+                    path:'/suit',
+                    name:'suit',
+                    component:resolve => require(['../components/parts/suit.vue'],resolve),
+                },
+                {
+                    path:'/addSuit',
+                    name:'addSuit',
+                    component:resolve => require(['../components/parts/addSuit.vue'],resolve),
+                },
 
 
             ]

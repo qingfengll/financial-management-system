@@ -4,6 +4,7 @@ const staff = require('./controllers/staff.controller');
 const material = require('./controllers/material.controller');
 const parts = require('./controllers/parts.controller');
 const staffPosition = require('./controllers/staffPosition.controller');
+const suit = require('./controllers/suit.controller');
 
 const fs = require('fs');
 const path = require('path');
@@ -20,6 +21,7 @@ app.use('/staff',staff);
 app.use('/material', material);
 app.use('/parts', parts);
 app.use('/staffPosition',staffPosition);
+app.use('/suit',suit);
 
 app.listen(3000);
 console.log('success listen at port: 3000')

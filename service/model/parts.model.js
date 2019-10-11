@@ -1,6 +1,7 @@
 var partsModel = {
     parts: {
         select_all:'select * from parts',
+        select_count:"select count(*) as count from parts",
         delete:'DELETE FROM parts WHERE parts_id=?',
         update:'UPDATE parts SET name=?,specifications=?,unit=?,remark=? WHERE parts_id=?;',
         add: 'INSERT INTO `parts` (`parts_id`, `name`, `specifications`, `unit`, `remark`) VALUES (?,?,?,?,?)',
