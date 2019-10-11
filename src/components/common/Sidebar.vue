@@ -54,10 +54,6 @@
                                 title: '员工管理'
                             },
                             {
-                                index: 'viewvStarff',
-                                title: '查看员工'
-                            },
-                            {
                                 index: 'overtimeManage',
                                 title: '员工加班管理'
                             },

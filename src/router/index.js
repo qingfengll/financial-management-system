@@ -26,14 +26,14 @@ export default new Router({
                     component: resolve => require(['../components/page/ModifyUser.vue'], resolve)
                 },
                 {
-                    path: '/starffManage',
+                    path: '/staffManage',
+                    name:'staffManage',
                     component:resolve => require(['../components/staff/staffManage.vue'],resolve),
-                    children:[
-                        {
-                            path: '/staffManage',
-                            component:resolve => require(['../components/staff/staffManage.vue'],resolve),       // Vue-Core-Image-Upload组件
-                        }
-                    ]
+                },
+                {
+                    path: '/staffPositionManage',
+                    name:'staffPositionManage',
+                    component:resolve => require(['../components/staff/staffPositionManage.vue'],resolve),       // Vue-Core-Image-Upload组件
                 },
                 {
                     path: '/part',
