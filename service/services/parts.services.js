@@ -54,6 +54,30 @@ module.exports = {
             }
         });
     },
+    getAllPart:function(req,res){
+        var sql = $sql.parts.select_all;
+        conn.query(sql, function(err, result) {
+            if (err) {
+                console.log("cuowu " + result);
+                console.log(err);
+            }else {
+                util.jsonWrite(res, result);
+            }
+        });
+    },
+    getPartsCount(req,res){
+        var sql_name = $sql.parts.select_count;
+        conn.query(sql_name, function(err, result) {
+            if (err) {
+                console.log(err);
+            }
+            if (result[0] === undefined) {
+                res.send('-1');   //查询不出username，data 返回-1
+            } else {
+                util.jsonWrite(res, result);
+            }
+        });
+    },
     getMaterialParts:function (req,res) {
         var sqlName = $sql.material_parts.getAllByPartsId;
 
@@ -102,7 +126,6 @@ module.exports = {
         });
     },
     delete:function (req,res) {
-        console.log(req);
         var sqlName = $sql.parts.delete;
         var sqlM_P_Name = $sql.material_parts.delete;
 

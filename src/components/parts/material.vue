@@ -15,7 +15,8 @@
             <el-table-column label="厚度（mm)" prop="thick"></el-table-column>
             <el-table-column label="数量（m）" prop="count"></el-table-column>
             <el-table-column label="单价（元/m)" prop="price"></el-table-column>
-            <el-table-column align="right" width="100px">
+            <el-table-column>
+                <template slot="header" slot-scope="scope">操作</template>
                 <template slot-scope="scope">
                     <el-link
                         size="mini"
@@ -24,7 +25,7 @@
                     <el-link
                         size="mini"
                         type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">删除&nbsp;&nbsp;&nbsp;</el-link>
+                        @click="handleDelete(scope.$index, scope.row)">删除</el-link>
                 </template>
             </el-table-column>
         </el-table>

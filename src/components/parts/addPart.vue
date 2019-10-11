@@ -45,6 +45,7 @@
 
 
         <el-dialog title="零件信息" :visible.sync="dialogTableVisible">
+            <el-input v-model="searchMaterial" placeholder="输入零件名字搜索" style="width: 200px;margin:0 0 10px 0;"></el-input>
             <el-table :data="materialData.filter(data => !searchMaterial ||
                     data.name.toLowerCase().includes(searchMaterial.toLowerCase())).slice((currentPageMarerial-1)*5,currentPageMarerial*5)">
                 <el-table-column label="零件名字" prop="name" ></el-table-column>

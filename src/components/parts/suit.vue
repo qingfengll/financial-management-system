@@ -1,8 +1,8 @@
 <template>
     <div>
         <div>
-            <el-button v-on:click="addPart()" type="primary" style="float: right;margin: 0 0 10px 0">添加部件</el-button>
-            <el-input v-model="search" placeholder="输入零件名字搜索" style="width: 200px;margin:0 0 10px 0;"></el-input>
+            <el-button v-on:click="addSuit()" type="primary" style="float: right;margin: 0 0 10px 0">添加套装</el-button>
+            <el-input v-model="search" placeholder="输入套装名字搜索" style="width: 200px;margin:0 0 10px 0;"></el-input>
         </div>
 
         <el-table
@@ -11,9 +11,8 @@
             style="width: 100%"
             @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column prop="name" label="部件名称"></el-table-column>
+            <el-table-column prop="name" label="套装名称"></el-table-column>
             <el-table-column prop="specifications" label="规格" show-overflow-tooltip></el-table-column>
-            <el-table-column prop="unit" label="单位" show-overflow-tooltip></el-table-column>
             <el-table-column prop="remark" label="备注" show-overflow-tooltip></el-table-column>
             <el-table-column>
                 <template slot="header" slot-scope="scope">操作</template>
@@ -33,7 +32,7 @@
                 </template>
             </el-table-column>
         </el-table>
-            <el-pagination
+        <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
@@ -74,14 +73,18 @@
                     }
                 }
                 const self = this;
-                self.$http.get('/api/parts/getAll',{params:params}).then(function(response) {
+                self.$http.get('/api/suit/getAll',{params:params}).then(function(response) {
                     self.tableData = response.data;
+                }).then(function (error) {
+                    console.log(error)
                 });
             },
             getCount(){
                 const self = this;
-                self.$http.get('/api/parts/getPartsCount',{}).then(function(response) {
+                self.$http.get('/api/suit/getSuitCount',{}).then(function(response) {
                     self.total = response.data[0].count;
+                }).then(function (error) {
+                    console.log(error)
                 });
             },
             toggleSelection(rows) {
@@ -104,11 +107,15 @@
                 this.currentPage = val;
                 this.getData();
             },
-            addPart(){
-                this.$router.push('/addPart');
+            addSuit(){
+                this.$router.push('/addSuit').then(function (error) {
+                    console.log(error)
+                });
             },
             handleEdit(index, row, boo) {
-                this.$router.push({name:'addPart',params:{data:row,boo:boo}});
+                this.$router.push({name:'addSuit',params:{data:row,boo:boo}}).then(function (error) {
+                    console.log(error)
+                });
             },
             handleDelete(index, row){
                 const self = this;
@@ -118,7 +125,7 @@
                     type: 'warning',
                     center: true
                 }).then(() => {
-                    self.$http.post('/api/parts/delete', {id: row.parts_id}).then(function (response) {
+                    self.$http.post('/api/suit/delete', {id: row.suit_id}).then(function (response) {
                         if (response.status == 200) {
                             self.$message({
                                 type: 'success',
@@ -131,6 +138,8 @@
                                 message: '已取消删除'
                             });
                         }
+                    }).then(function (error) {
+                        console.log(error)
                     });
                 });
             }

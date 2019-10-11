@@ -15,7 +15,8 @@
             <el-table-column label="座机" prop="landline" ></el-table-column>
             <el-table-column label="地址" prop="address"></el-table-column>
             <el-table-column label="备注" prop="remark" ></el-table-column>
-            <el-table-column align="right">
+            <el-table-column>
+                <template slot="header" slot-scope="scope">操作</template>
                 <template slot-scope="scope">
                     <el-link
                         size="mini"
@@ -24,7 +25,7 @@
                     <el-link
                         size="mini"
                         type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">删除&nbsp;&nbsp;&nbsp;</el-link>
+                        @click="handleDelete(scope.$index, scope.row)">删除</el-link>
                 </template>
             </el-table-column>
         </el-table>
