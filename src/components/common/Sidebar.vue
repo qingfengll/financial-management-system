@@ -35,10 +35,6 @@
                                 title: '数据分析'
                             },
                             {
-                                index: 'overtimeManage',
-                                title: '员工加班管理'
-                            },
-                            {
                                 index: 'updataPassword',
                                 title: '修改密码'
                             }
