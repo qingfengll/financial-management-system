@@ -96,8 +96,26 @@ export default new Router({
                     name:'addSuit',
                     component:resolve => require(['../components/parts/addSuit.vue'],resolve),
                 },
-
-
+                {
+                    path:'/quotes',
+                    name:'quotes',
+                    component:resolve => require(['../components/company/quotes.vue'],resolve),
+                },
+                {
+                    path:'/addQuotes',
+                    name:'addQuotes',
+                    component:resolve => require(['../components/company/addQuotes.vue'],resolve),
+                },
+                {
+                    path:'/accountStatement',
+                    name:'accountStatement',
+                    component:resolve => require(['../components/finance/accountStatement.vue'],resolve),
+                },
+                {
+                    path:'/AddAccountStatement',
+                    name:'AddAccountStatement',
+                    component:resolve => require(['../components/finance/AddAccountStatement.vue'],resolve),
+                },
             ]
         },
         {

@@ -19,6 +19,17 @@ module.exports = {
             }
         });
     },
+    getAllSuit:function (req,res) {
+        var sql = $sql.suit.select_all;
+        conn.query(sql, function(err, result) {
+            if (err) {
+                console.log("cuowu " + result);
+                console.log(err);
+            }else {
+                util.jsonWrite(res, result);
+            }
+        });
+    },
     getSuitCount(req,res){
         var sql_name = $sql.suit.select_count;
         conn.query(sql_name, function(err, result) {

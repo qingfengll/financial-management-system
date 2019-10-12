@@ -108,9 +108,7 @@
                 this.getData();
             },
             addSuit(){
-                this.$router.push('/addSuit').then(function (error) {
-                    console.log(error)
-                });
+                this.$router.push('/addSuit');
             },
             handleEdit(index, row, boo) {
                 this.$router.push({name:'addSuit',params:{data:row,boo:boo}}).then(function (error) {

@@ -50,10 +50,6 @@
                                 title: '员工管理'
                             },
                             {
-                                index: 'overtimeManage',
-                                title: '员工加班管理'
-                            },
-                            {
                                 index: 'staffPositionManage',
                                 title: '员工职位管理'
                             }
@@ -90,10 +86,6 @@
                             {
                                 index: 'quotes',
                                 title: '订单管理'
-                            },
-                            {
-                                index: 'accountStatement',
-                                title: '对账信息'
                             }
                         ]
                     },
@@ -102,10 +94,6 @@
                         index:'finance',
                         title: '财务管理',
                         subs: [
-                            {
-                                index: 'company',
-                                title: '公司管理'
-                            },
                             {
                                 index: 'quotes',
                                 title: '订单管理'

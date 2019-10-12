@@ -8,6 +8,7 @@ router.post('/add', docController.add);
 router.post('/update', docController.update);
 router.post('/delete', docController.delete);
 router.get('/getPartsSuit', docController.getPartsSuit);
+router.get('/getAllSuit', docController.getAllSuit);
 
 module.exports = router;
 
