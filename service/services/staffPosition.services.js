@@ -55,7 +55,7 @@ module.exports = {
         var sqlName = $sql.staffPosition.add;
         var value = req.body;
         util.getMaxID('staff_position','position_id',function(id){
-            conn.query(sqlName,[id,value.position_name,value.base_pay,value.remark], function(err, result) {
+            conn.query(sqlName,[id,value.position_name,value.base_pay,value.remark,value.overtime_hourly_wage], function(err, result) {
                 if (err) {
                     console.log(err);
                 }
@@ -71,7 +71,7 @@ module.exports = {
     updatePosition:function (req,res) {
         var sqlName = $sql.staffPosition.update_position;
         var value = req.body;
-            conn.query(sqlName,[value.position_name,value.base_pay,value.remark,value.position_id], function(err, result) {
+            conn.query(sqlName,[value.position_name,value.base_pay,value.remark,value.overtime_hourly_wage,value.position_id], function(err, result) {
                 if (err) {
                     console.log(err);
                 }

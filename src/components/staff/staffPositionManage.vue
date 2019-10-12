@@ -34,6 +34,9 @@
         <el-form-item label="基本工资" prop="base_pay">
           <el-input v-model="form.base_pay" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
+         <el-form-item label="加班时薪" prop="overtime_hourly_wage">
+          <el-input v-model="form.overtime_hourly_wage" autocomplete="off" class="form_input"></el-input>
+        </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
@@ -62,11 +65,13 @@ export default {
       rules: {
         position_name: [{ required: true, message: '请输入职务名称', trigger: 'blur' }],
         base_pay: [{ required: true, message: '请输入基本工资', trigger: 'blur' }],
+        overtime_hourly_wage: [{ required: true, message: '请输入加班时薪', trigger: 'blur' }],
       },
       form:{
         position_name:"",
         base_pay:0,
-        remark:""
+        remark:"",
+        overtime_hourly_wage:''
       }
     };
   },

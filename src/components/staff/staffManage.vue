@@ -40,8 +40,8 @@
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40,50]" :page-size="pageSize" style="margin-top:20px"
       layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
-    <el-dialog width="30%" :title="dialogTitle" :visible.sync="dialogFormVisible" :close-on-click-modal=false>
-      <el-form label-position="right" ref="form" label-width="80px" :rules="rules" :model="form" :disabled="formDisabled">
+    <el-dialog width="40%" :title="dialogTitle" :visible.sync="dialogFormVisible" :close-on-click-modal=false>
+      <el-form label-position="right" ref="form" label-width="100px" :rules="rules" :model="form" :disabled="formDisabled">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="form.name" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
@@ -55,7 +55,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="职务" prop="position_id">
-          <el-select v-model="form.position_id" placeholder="请选择活动区域">
+          <el-select v-model="form.position_id" @change="selectChange" placeholder="请选择活动区域">
             <el-option v-for="option in options" :key="option.name" :label="option.position_name" :value="option.position_id"></el-option>
           </el-select>
         </el-form-item>
@@ -64,6 +64,21 @@
         </el-form-item>
         <el-form-item label="身份证" prop="id_card">
           <el-input v-model="form.id_card" autocomplete="off" class="form_input"></el-input>
+        </el-form-item>
+        <el-form-item label="加班时长" prop="overtime">
+          <el-input v-model="form.overtime" autocomplete="off" class="form_input"></el-input>
+        </el-form-item>
+        <el-form-item v-if="dialogTitle == '查看员工'" label="加班时薪" prop="overtime_hourly_wage">
+          <el-input v-model="overtime_hourly_wage" disabled="true" autocomplete="off" class="form_input"></el-input>
+        </el-form-item>
+        <el-form-item v-if="dialogTitle == '查看员工'" label="加班工资" prop="overtime_hourly_wage">
+          <el-input v-model="overtime_money" disabled="true" autocomplete="off" class="form_input"></el-input>
+        </el-form-item>
+        <el-form-item v-if="dialogTitle == '查看员工'" label="基本工资" prop="overtime_hourly_wage">
+          <el-input v-model="base_pay" disabled="true" autocomplete="off" class="form_input"></el-input>
+        </el-form-item>
+        <el-form-item v-if="dialogTitle == '查看员工'" label="应结工资" prop="overtime_hourly_wage">
+          <el-input v-model="wages" disabled="true" autocomplete="off" class="form_input"></el-input>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" autocomplete="off" class="form_input"></el-input>
@@ -103,8 +118,13 @@ export default {
         position_id: '',
         birthday: '',
         id_card: '',
+        overtime:'',
         remark: ''
       },
+      overtime_hourly_wage:'',
+      overtime_money:'',
+      base_pay:'',
+      wages:'',
       rules: {
         name: [{ required: true, message: '请输入员工姓名', trigger: 'blur' }],
         phone: [
@@ -123,6 +143,9 @@ export default {
         ],
         id_card: [
           { required: true, message: '请输入身份证号', trigger: 'blur' }
+        ],
+        overtime:[
+          {required: true, message: '请输入加班时长', trigger: 'blur'}
         ]
       },
       options: [],
@@ -181,6 +204,14 @@ export default {
           self.options = response.data;
         });
     },
+    selectChange(val){
+      console.log(val);
+      this.options.forEach(item => {
+        if(item.position_id == val){
+          this.overtime_hourly_wage = item.overtime_hourly_wage;
+        }
+      })
+    },
     addStaff() {
       this.dialogTitle = '添加员工';
       this.dialogFormVisible = true;
@@ -192,6 +223,10 @@ export default {
       this.dialogTitle = '查看员工';
       this.dialogFormVisible = true;
       this.form = row;
+      this.base_pay = row.base_pay;
+      this.overtime_hourly_wage = row.overtime_hourly_wage;
+      this.overtime_money = Number(this.overtime_hourly_wage) * Number(this.form.overtime);
+      this.wages = Number(row.base_pay) + Number(this.overtime_money);
       if (row.sex === '男') {
         this.form.sex = '0';
       } else {
@@ -324,6 +359,6 @@ export default {
   margin-left: 20px;
 }
 .form_input {
-  width: 80%;
+  width: 85%;
 }
 </style>

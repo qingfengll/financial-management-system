@@ -8,7 +8,7 @@ conn.connect();
 
 module.exports = {
     getStaff(req,res){
-        var sqlSelect = "select staff.*,job.position_name as job_name,job.base_pay from staff left join staff_position job on staff.position_id = job.position_id"
+        var sqlSelect = "select staff.*,job.position_name as job_name,job.base_pay,job.overtime_hourly_wage from staff left join staff_position job on staff.position_id = job.position_id"
         var sql_name = search.slect_pages(sqlSelect,req.query);
         conn.query(sql_name, function(err, result) {
             if (err) {
@@ -58,7 +58,7 @@ module.exports = {
         var value = req.body;
         var birthday = util.formateDate(value.birthday);
         util.getMaxID('staff','staff_id',function(id){
-            conn.query(sqlName,[id,value.name,value.phone,value.position_id,value.sex,birthday,value.id_card,value.remark], function(err, result) {
+            conn.query(sqlName,[id,value.name,value.phone,value.position_id,value.sex,birthday,value.id_card,value.remark,value.overtime], function(err, result) {
                 if (err) {
                     console.log(err);
                 }
@@ -75,7 +75,7 @@ module.exports = {
         var sqlName = $sql.staff.update_staff;
         var value = req.body;
         var birthday = util.formateDate(value.birthday);
-            conn.query(sqlName,[value.name,value.phone,value.position_id,value.sex,birthday,value.id_card,value.remark,value.staff_id], function(err, result) {
+            conn.query(sqlName,[value.name,value.phone,value.position_id,value.sex,birthday,value.id_card,value.remark,value.overtime,value.staff_id], function(err, result) {
                 if (err) {
                     console.log(err);
                 }
