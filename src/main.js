@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 import SIdentify from './components/page/Identify';    //自定义组件
 import "babel-polyfill";
 import echarts from "echarts";
+import './permission';
 Vue.prototype.$echarts = echarts;
 
 Vue.component("SIdentify",SIdentify);

@@ -70,12 +70,12 @@ export default {
                   self.errorInfo = true;
                   self.errInfo = '密码错误';
                 } else if (response.status == 200) {
-                  self.$router.push('/analysis');
                   sessionStorage.setItem('ms_username', self.ruleForm.name);
                   sessionStorage.setItem(
                     'ms_user',
                     JSON.stringify(self.ruleForm)
                   );
+                  self.$router.push('/analysis');
                 }
               })
               .then(error => {
